@@ -13,3 +13,16 @@ body { margin: 0; }
 .leaflet-popup-content {
   margin: 10px 12px;
 }
+
+/* Mobile responsive nav */
+@media (max-width: 768px) {
+  .desktop-nav {
+    display: none !important;
+  }
+  .mobile-nav-toggle {
+    display: block !important;
+  }
+  .mobile-menu {
+    display: block !important;
+  }
+}

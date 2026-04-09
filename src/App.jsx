@@ -146,26 +146,133 @@ const TEAM = [
   { name: "Mikkel Hansen", role: "Operations & tenancy", flags: "🇩🇰", story: "Born in Copenhagen. Lease negotiations, inspections, deposit recovery. Landlords respect him.", years: 15 },
 ];
 
+const TESTIMONIALS = [
+  { quote: "We landed in Copenhagen with two kids, no apartment, and a work permit that hadn't come through. Sarah had our CPR numbers within 48 hours and keys to a flat in Østerbro by day five. I still don't know how she did it.", name: "Laura & Tomás R.", context: "Family of 4, relocated from São Paulo", type: "individual" },
+  { quote: "We've used Copenhagen Relocations for 23 hires over four years. Zero failed assignments. Our retention rate for Denmark-based engineers went from 65% to 91% after we started working with them.", name: "Head of People, Series B fintech", context: "15+ relocations per year", type: "corporate" },
+  { quote: "I was terrified about the housing market. Marie found me an apartment in Nørrebro that wasn't even listed yet. Private viewing, signed the lease that week. Without her I'd still be in a hotel.", name: "Aisha K.", context: "Software engineer, relocated from Nairobi", type: "individual" },
+  { quote: "The settling-in day alone justified the cost. CPR, MitID, bank, GP — all done before lunch. My previous company sent me to Munich without support and it took me three weeks to open a bank account.", name: "David C.", context: "Product manager, relocated from Toronto", type: "individual" },
+  { quote: "What impressed us most was the departure management. Move-out refurbishments had been costing us €4,000–6,000 per employee. Copenhagen Relocations brought that down to under €1,500 on average.", name: "Global Mobility Manager, pharma multinational", context: "Enterprise client since 2019", type: "corporate" },
+];
+
+const CASE_STUDIES = [
+  {
+    slug: "family-sao-paulo", tag: "Individual", title: "From São Paulo to Østerbro in 6 weeks",
+    subtitle: "A family of four, two school-age children, and a visa timeline that left no room for error.",
+    heroColor: "#29275f",
+    challenge: "Tomás received a job offer from a Copenhagen-based robotics company in late August. School started September 15. The family needed work permit, housing, school placements, and full settling-in — in under six weeks.",
+    approach: [
+      "Fast-track work permit filed on day one through the company's certified status — approved in 3 business days",
+      "Private viewings arranged for 8 apartments in Østerbro and Frederiksberg before the family arrived",
+      "Copenhagen International School contacted for the eldest; Kildevældsskole (public, Danish-language) explored for the youngest based on family's integration preference",
+      "Settling-in day scheduled for arrival +2: CPR, MitID, bank, GP, Rejsekort completed same day",
+    ],
+    result: "Family moved into a 4-room apartment on Classensgade (Østerbro) on September 8. Both children started school on time. Tomás was operational at work by September 12 — four days after landing. Laura joined a yoga forening in Fælledparken within the first month.",
+    quote: "We expected chaos. Instead we got a WhatsApp message from Sarah every morning telling us exactly what was happening that day. It felt like having a friend in the city before we even arrived.",
+    quoteName: "Laura R.",
+  },
+  {
+    slug: "fintech-15-engineers", tag: "Corporate", title: "15 engineers in 4 months — without losing one",
+    subtitle: "A Series B fintech needed to build a Copenhagen engineering hub from scratch.",
+    heroColor: "#0f4e4d",
+    challenge: "The company had just raised €40M and committed to opening a Copenhagen office. They needed 15 engineers relocated from 9 different countries within a single quarter. Their internal HR team had two people. They'd never done international relocation at scale.",
+    approach: [
+      "Dedicated account manager (Wei Zhang) assigned as single point of contact for the People team",
+      "Standardised relocation packages designed in three tiers: single, couple, family — each with defined scope and timeline",
+      "Batch immigration processing: all 15 work permits filed in the first two weeks, staggered by visa type",
+      "Housing sourced through landlord network — 12 of 15 placed in the same two buildings in Nordhavn (team proximity by design)",
+      "Group orientation tour for the first cohort of 6, individual settling-in days for all",
+    ],
+    result: "All 15 engineers relocated within 16 weeks. Zero permit rejections. Average time from landing to full operational status: 6 business days. One year later: zero departures attributed to relocation dissatisfaction. The company has since relocated 8 more employees through the same program.",
+    quote: "Wei made our team of two feel like a team of twenty. Every engineer landed and said the same thing: 'That was surprisingly painless.' That's exactly what we needed.",
+    quoteName: "VP of Engineering",
+  },
+  {
+    slug: "departure-pharma", tag: "Corporate", title: "Saving €180k in move-out costs across 12 departures",
+    subtitle: "A pharmaceutical company was haemorrhaging money on poorly managed apartment handovers.",
+    heroColor: "#3d3a7a",
+    challenge: "The company's Denmark office cycled through 10–15 expat assignments per year. Move-out refurbishments were consistently costing €4,000–6,000 per apartment — sometimes more. Deposit recovery was inconsistent. HR had no visibility into what was being charged or why.",
+    approach: [
+      "Mikkel Hansen (Operations & Tenancy, 15 years) conducted independent move-in inspections with 1,000+ timestamped photos for every new lease",
+      "Move-out inspections scheduled 8 weeks before departure — enough time to address issues before the landlord's own inspection",
+      "Refurbishment managed through our vetted partner (Homie) at pre-negotiated rates — typically 40–60% below landlord-sourced contractors",
+      "Deposit recovery pursued systematically with documentation trail",
+    ],
+    result: "Over 12 departures in 18 months: average move-out cost reduced from €5,200 to €1,400 per apartment. Total saving: approximately €180,000 — net of Copenhagen Relocations' fees. Deposit recovery rate improved from 35% to 88%.",
+    quote: "We were essentially lighting money on fire every time someone left Denmark. Mikkel's inspection process alone paid for the entire relocation program.",
+    quoteName: "Global Mobility Manager",
+  },
+];
+
+const FAQ_DATA = [
+  { category: "Cost & pricing", questions: [
+    { q: "How much does relocation support cost?", a: "It depends on scope. A single professional needing immigration + settling-in typically starts from DKK 15,000–25,000. A full family program with housing, schools, and orientation runs DKK 35,000–60,000. Corporate programs are priced per hire with volume discounts. We'll give you an exact quote after a 15-minute call — no obligation." },
+    { q: "Is it worth it if I can do it myself?", a: "Honestly? If you're single, speak English, have 2–3 months, and enjoy bureaucracy — you can manage. But if you have a family, a tight timeline, or simply want to start your new life instead of fighting with Borgerservice, the time and stress savings pay for themselves. Our housing access alone — private viewings before properties go public — is something you can't replicate." },
+    { q: "Do you charge the landlord a commission?", a: "No. Never. Some agencies take a month's rent from the landlord and call it 'free' for you. That creates a conflict of interest — they'll steer you toward apartments that pay them. We work exclusively for you." },
+    { q: "Can my company pay for this?", a: "Yes, and many do. Most corporate packages cover relocation as part of the employment offer. We work with your HR team to scope the program and invoice the company directly. If your employer doesn't currently offer relocation support, we can help you make the case — we have template proposals." },
+  ]},
+  { category: "Immigration & visas", questions: [
+    { q: "What if my work permit is denied?", a: "It's rare when the application is prepared properly — our rejection rate is under 2%. If it does happen, we analyse the reason, advise on options (reapplication, alternative permit types, appeal), and support you through the process. We don't disappear when things get difficult." },
+    { q: "How long does a work permit take?", a: "Fast-track (certified companies): same day to 2 weeks. Pay Limit scheme: 1–4 weeks. Positive List: 1–4 weeks. Researcher scheme: 1–2 weeks. Some cases take 2–3 months. We'll give you a realistic timeline based on your specific situation." },
+    { q: "Can my partner work in Denmark?", a: "If you're on a work permit, your spouse/partner can apply for an accompanying residence permit that includes work rights. EU/EEA partners have freedom to work. We handle the family reunification paperwork as part of the program." },
+    { q: "I'm an EU citizen — do I still need help?", a: "You don't need a work permit, but you still need EU registration, CPR, MitID, bank, GP, housing, and potentially school placements. The bureaucracy is the same. Many of our clients are EU citizens who want the process handled professionally." },
+  ]},
+  { category: "Housing", questions: [
+    { q: "How hard is it to find an apartment in Copenhagen?", a: "Very. The vacancy rate is 1–2%. An open-house viewing can draw 40–50 people. Scams are common on public portals. Through our landlord network, we source 30+ properties a week — many before they're publicly listed. Average time to placement through us: 2–3 weeks. On the open market without help: 4–8 weeks." },
+    { q: "What does rent cost in Copenhagen?", a: "Depends on neighbourhood and size. Rough ranges for a 2–3 room apartment: Valby DKK 8,000–12,000. Nørrebro/Vesterbro DKK 10,000–15,000. Østerbro/Frederiksberg DKK 12,000–18,000. Nordhavn DKK 13,000–20,000. We benchmark rents so you don't overpay." },
+    { q: "Can you help me buy a property?", a: "We provide purchase advisory — market briefing, neighbourhood guidance, and referrals to trusted estate agents and mortgage brokers. We don't act as estate agents ourselves, but we make sure you understand the Danish property market before you commit." },
+  ]},
+  { category: "Family & schools", questions: [
+    { q: "My kids don't speak English or Danish — is that a problem?", a: "Not necessarily. International schools teach in English and are designed for children who've moved before. Danish public schools offer modtagerklasser (reception classes) for non-Danish speakers — immersive and effective, but it takes 1–2 years. We visit schools with you and give honest advice based on your child's age, language, and how long you plan to stay." },
+    { q: "How long are childcare waitlists?", a: "3–12 months, depending on the area. We register your child as early as legally possible — ideally before you arrive. Some municipalities allow registration from abroad. This is one of the most time-sensitive parts of relocation." },
+    { q: "Which is better — international school or Danish public school?", a: "There's no universal answer. International schools offer continuity and English instruction, but they're expensive (DKK 95,000–155,000/year) and can be a social bubble. Danish public schools are free, excellent, and integrate your child into local life — but the language transition is real. We help you weigh the trade-offs for your specific family." },
+  ]},
+  { category: "Life in Denmark", questions: [
+    { q: "Will I make friends?", a: "Yes, but it takes longer than you expect. Danish social circles form early and stay closed. The proven strategy: join a forening (club/association). Danes bond through shared activities, not small talk. We help you find the right one. Expect 1–2 years to build a real network. That's normal." },
+    { q: "Is Denmark really that expensive?", a: "Yes and no. Taxes are high, but they cover healthcare, education (including university), parental leave, and childcare subsidies. Groceries and dining are expensive by most standards. Housing is the biggest cost. Many international hires qualify for the Researcher Tax Scheme — 27% flat tax for up to 7 years. Net of that, take-home can be competitive." },
+    { q: "What about the winter?", a: "December and January: 7 hours of daylight. It's dark when you leave for work and dark when you come home. It's real, and it affects people. Vitamin D, a good jacket, candles, and — critically — having something to do (see: foreninger) makes a huge difference. Summer compensates: 17+ hours of daylight, the city comes alive, and you'll understand why people stay." },
+  ]},
+];
+
 // ─── Shared UI ───
 
 const F = "'Libre Franklin',Arial,sans-serif";
 const G = "Garamond,Georgia,serif";
 
+const NAV_ITEMS = [["Services","services"],["For HR","hr"],["Case studies","cases"],["City map","guides"],["Life in DK","life"],["FAQ","faq"],["Useful links","links"],["Team","about"]];
+
 function Nav({ page, setPage }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const go = (p) => { setPage(p); setMenuOpen(false); window.scrollTo(0,0); };
   return (
     <nav style={{ position:"fixed",top:0,width:"100%",zIndex:100,background:"rgba(250,249,246,0.94)",backdropFilter:"blur(14px)",borderBottom:"1px solid rgba(41,39,95,0.06)",padding:"0 clamp(16px,3vw,48px)" }}>
       <div style={{ maxWidth:1200,margin:"0 auto",display:"flex",justifyContent:"space-between",alignItems:"center",height:60 }}>
-        <div style={{ cursor:"pointer",display:"flex",alignItems:"baseline",gap:6 }} onClick={()=>{setPage("home");window.scrollTo(0,0)}}>
+        <div style={{ cursor:"pointer",display:"flex",alignItems:"baseline",gap:6 }} onClick={()=>go("home")}>
           <span style={{ fontFamily:G,fontSize:19,fontWeight:700,color:"#29275f" }}>Copenhagen</span>
           <span style={{ fontFamily:G,fontSize:19,color:"#65c9c7" }}>Relocations</span>
         </div>
-        <div style={{ display:"flex",alignItems:"center",gap:20,flexWrap:"wrap" }}>
-          {[["Services","services"],["For HR","hr"],["City map","guides"],["Life in DK","life"],["Useful links","links"],["Team","about"]].map(([l,p])=>(
-            <span key={p} onClick={()=>{setPage(p);window.scrollTo(0,0)}} style={{ fontSize:12.5,color:page===p?"#29275f":"#999",fontWeight:page===p?600:400,cursor:"pointer",fontFamily:F }}>{l}</span>
+        {/* Desktop nav */}
+        <div style={{ display:"flex",alignItems:"center",gap:18,flexWrap:"wrap" }} className="desktop-nav">
+          {NAV_ITEMS.map(([l,p])=>(
+            <span key={p} onClick={()=>go(p)} style={{ fontSize:12,color:page===p?"#29275f":"#999",fontWeight:page===p?600:400,cursor:"pointer",fontFamily:F }}>{l}</span>
           ))}
-          <button onClick={()=>{setPage("book");window.scrollTo(0,0)}} style={{ background:"#29275f",color:"#fff",border:"none",borderRadius:100,padding:"8px 18px",fontSize:12,fontWeight:600,cursor:"pointer",fontFamily:F }}>Book a call</button>
+          <button onClick={()=>go("book")} style={{ background:"#29275f",color:"#fff",border:"none",borderRadius:100,padding:"8px 18px",fontSize:12,fontWeight:600,cursor:"pointer",fontFamily:F }}>Book a call</button>
+        </div>
+        {/* Mobile hamburger */}
+        <div className="mobile-nav-toggle" style={{ display:"none",cursor:"pointer",padding:8 }} onClick={()=>setMenuOpen(!menuOpen)}>
+          <div style={{ width:20,height:2,background:"#29275f",marginBottom:4,transition:"all 0.2s",transform:menuOpen?"rotate(45deg) translateY(6px)":"" }}/>
+          <div style={{ width:20,height:2,background:"#29275f",marginBottom:4,opacity:menuOpen?0:1,transition:"opacity 0.2s" }}/>
+          <div style={{ width:20,height:2,background:"#29275f",transition:"all 0.2s",transform:menuOpen?"rotate(-45deg) translateY(-6px)":"" }}/>
         </div>
       </div>
+      {/* Mobile menu dropdown */}
+      {menuOpen && <div className="mobile-menu" style={{ display:"none",background:"rgba(250,249,246,0.98)",padding:"12px 0 20px",borderTop:"1px solid rgba(41,39,95,0.04)" }}>
+        {NAV_ITEMS.map(([l,p])=>(
+          <div key={p} onClick={()=>go(p)} style={{ padding:"10px clamp(16px,3vw,48px)",fontSize:14,color:page===p?"#29275f":"#999",fontWeight:page===p?600:400,cursor:"pointer",fontFamily:F }}>{l}</div>
+        ))}
+        <div style={{ padding:"10px clamp(16px,3vw,48px)" }}>
+          <button onClick={()=>go("book")} style={{ background:"#29275f",color:"#fff",border:"none",borderRadius:100,padding:"10px 22px",fontSize:13,fontWeight:600,cursor:"pointer",fontFamily:F,width:"100%" }}>Book a call</button>
+        </div>
+      </div>}
     </nav>
   );
 }
@@ -202,6 +309,35 @@ function LangCTA({ setPage }) {
 }
 
 function W({ children }) { return <div style={{ maxWidth:1200,margin:"0 auto",padding:"0 clamp(16px,3vw,48px)" }}>{children}</div>; }
+
+// Lead magnet email capture banner
+function LeadMagnet() {
+  const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  return <div style={{ background:"linear-gradient(135deg,#f2efe8,#e8f4f3)",borderRadius:16,padding:"clamp(24px,3vw,36px)",display:"grid",gridTemplateColumns:"minmax(0,1fr) minmax(0,1fr)",gap:24,alignItems:"center",margin:"44px 0" }}>
+    <div>
+      <Badge>Free download</Badge>
+      <h3 style={{ fontFamily:G,fontSize:"clamp(1.2rem,2vw,1.5rem)",color:"#29275f",margin:"10px 0 6px" }}>The Copenhagen Relocation Checklist</h3>
+      <p style={{ fontSize:13,color:"#999",lineHeight:1.7,fontFamily:F }}>Everything you need to do before, during, and after your move — in order. The same timeline our consultants use with clients.</p>
+    </div>
+    <div>
+      {submitted ? (
+        <div style={{ background:"#29275f",borderRadius:12,padding:24,textAlign:"center" }}>
+          <div style={{ fontSize:18,marginBottom:6 }}>&#10003;</div>
+          <div style={{ fontSize:14,color:"#65c9c7",fontWeight:600,fontFamily:F }}>Check your inbox</div>
+          <div style={{ fontSize:12,color:"rgba(255,255,255,0.5)",fontFamily:F,marginTop:4 }}>We've sent the checklist to {email}</div>
+        </div>
+      ) : (
+        <div style={{ display:"flex",gap:8 }}>
+          <input type="email" placeholder="Your email address" value={email} onChange={e=>setEmail(e.target.value)}
+            style={{ flex:1,padding:"12px 16px",borderRadius:100,border:"1px solid rgba(41,39,95,0.1)",fontSize:13,fontFamily:F,outline:"none",background:"#fff" }} />
+          <button onClick={()=>{if(email.includes("@"))setSubmitted(true)}}
+            style={{ background:"#29275f",color:"#fff",border:"none",borderRadius:100,padding:"12px 20px",fontSize:12,fontWeight:600,cursor:"pointer",fontFamily:F,whiteSpace:"nowrap" }}>Send me the checklist</button>
+        </div>
+      )}
+    </div>
+  </div>;
+}
 
 // ─── Interactive Copenhagen Map (Leaflet) ───
 
@@ -347,6 +483,25 @@ function HomePage({ setPage }) {
         <div><div style={{ fontSize:14,fontWeight:600,color:"#29275f",marginBottom:2,fontFamily:F }}>{s.t}</div><div style={{ fontSize:12,color:"#999",fontFamily:F }}>{s.d}</div></div>
       </div>)}</div>
     </W></section>
+
+    {/* Testimonials */}
+    <section><W>
+      <SH badge="What clients say" title="Real people, real moves" />
+      <div style={{ display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(300px,1fr))",gap:12,marginBottom:16 }}>
+        {TESTIMONIALS.slice(0,3).map((t,i)=><div key={i} style={{ background:"#fff",border:"1px solid rgba(41,39,95,0.04)",borderRadius:12,padding:22 }}>
+          <div style={{ marginBottom:10 }}><Badge>{t.type==="corporate"?"Corporate client":"Individual"}</Badge></div>
+          <p style={{ fontSize:13,color:"#666",lineHeight:1.7,fontFamily:F,fontStyle:"italic",marginBottom:12 }}>"{t.quote}"</p>
+          <div style={{ fontSize:13,fontWeight:600,color:"#29275f",fontFamily:F }}>{t.name}</div>
+          <div style={{ fontSize:11,color:"#999",fontFamily:F }}>{t.context}</div>
+        </div>)}
+      </div>
+      <div style={{ textAlign:"center" }}>
+        <span onClick={()=>{setPage("cases");window.scrollTo(0,0)}} style={{ fontSize:13,color:"#65c9c7",fontWeight:600,cursor:"pointer",fontFamily:F }}>Read full case studies →</span>
+      </div>
+    </W></section>
+
+    {/* Lead magnet */}
+    <section><W><LeadMagnet /></W></section>
 
     <section><W><LangCTA setPage={setPage} /></W></section>
 
@@ -708,6 +863,139 @@ function UsefulLinksPage({ setPage }) {
   </W></section>;
 }
 
+function CaseStudiesPage({ setPage }) {
+  return <section style={{ paddingTop:88 }}><W>
+    <SH badge="Case studies" title="How relocations actually work" sub="Real scenarios, real outcomes. Names changed where requested." />
+
+    {/* Testimonial strip */}
+    <div style={{ display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(220px,1fr))",gap:10,marginBottom:36 }}>
+      {TESTIMONIALS.map((t,i)=><div key={i} style={{ background:t.type==="corporate"?"#29275f":"#fff",border:t.type==="corporate"?"none":"1px solid rgba(41,39,95,0.04)",borderRadius:12,padding:18 }}>
+        <p style={{ fontSize:12,color:t.type==="corporate"?"rgba(255,255,255,0.7)":"#666",lineHeight:1.6,fontFamily:F,fontStyle:"italic",marginBottom:10 }}>"{t.quote.slice(0,120)}…"</p>
+        <div style={{ fontSize:12,fontWeight:600,color:t.type==="corporate"?"#65c9c7":"#29275f",fontFamily:F }}>{t.name}</div>
+        <div style={{ fontSize:10,color:t.type==="corporate"?"rgba(255,255,255,0.35)":"#ccc",fontFamily:F }}>{t.context}</div>
+      </div>)}
+    </div>
+
+    {/* Full case studies */}
+    <div style={{ display:"flex",flexDirection:"column",gap:32,marginBottom:20 }}>
+      {CASE_STUDIES.map((cs,i)=><div key={i} style={{ background:"#fff",border:"1px solid rgba(41,39,95,0.04)",borderRadius:16,overflow:"hidden" }}>
+        <div style={{ background:cs.heroColor,padding:"clamp(20px,3vw,32px)" }}>
+          <Badge light>{cs.tag}</Badge>
+          <h3 style={{ fontFamily:G,fontSize:"clamp(1.3rem,2.5vw,1.8rem)",color:"#fff",marginTop:8,marginBottom:4 }}>{cs.title}</h3>
+          <p style={{ fontSize:13,color:"rgba(255,255,255,0.6)",fontFamily:F }}>{cs.subtitle}</p>
+        </div>
+        <div style={{ padding:"clamp(20px,3vw,32px)" }}>
+          <h4 style={{ fontFamily:G,fontSize:17,color:"#29275f",marginBottom:8 }}>The challenge</h4>
+          <p style={{ fontSize:13,color:"#666",lineHeight:1.7,fontFamily:F,marginBottom:20 }}>{cs.challenge}</p>
+
+          <h4 style={{ fontFamily:G,fontSize:17,color:"#29275f",marginBottom:8 }}>Our approach</h4>
+          <div style={{ marginBottom:20 }}>
+            {cs.approach.map((step,j)=><div key={j} style={{ display:"flex",gap:10,marginBottom:8 }}>
+              <div style={{ width:20,height:20,borderRadius:"50%",background:"#65c9c7",display:"flex",alignItems:"center",justifyContent:"center",fontSize:10,color:"#fff",fontWeight:700,flexShrink:0,marginTop:2 }}>{j+1}</div>
+              <p style={{ fontSize:13,color:"#666",lineHeight:1.6,fontFamily:F }}>{step}</p>
+            </div>)}
+          </div>
+
+          <h4 style={{ fontFamily:G,fontSize:17,color:"#29275f",marginBottom:8 }}>The result</h4>
+          <p style={{ fontSize:13,color:"#666",lineHeight:1.7,fontFamily:F,marginBottom:20 }}>{cs.result}</p>
+
+          <div style={{ background:"#f2efe8",borderRadius:12,padding:18,borderLeft:"4px solid #65c9c7" }}>
+            <p style={{ fontSize:14,color:"#29275f",lineHeight:1.7,fontFamily:F,fontStyle:"italic",marginBottom:6 }}>"{cs.quote}"</p>
+            <div style={{ fontSize:12,fontWeight:600,color:"#29275f",fontFamily:F }}>— {cs.quoteName}</div>
+          </div>
+        </div>
+      </div>)}
+    </div>
+
+    <div style={{ textAlign:"center",marginBottom:8 }}>
+      <button onClick={()=>{setPage("book");window.scrollTo(0,0)}} style={{ background:"#29275f",color:"#fff",border:"none",borderRadius:100,padding:"12px 24px",fontSize:13,fontWeight:600,cursor:"pointer",fontFamily:F }}>Start your relocation story →</button>
+    </div>
+    <LangCTA setPage={setPage} />
+  </W></section>;
+}
+
+function FAQPage({ setPage }) {
+  const [openQ, setOpenQ] = useState(null);
+  return <section style={{ paddingTop:88 }}><W>
+    <SH badge="FAQ" title="The questions you're actually thinking" sub="Honest answers. No sales pitch. If we don't know, we'll say so." />
+    <div style={{ display:"flex",flexDirection:"column",gap:24,marginBottom:20 }}>
+      {FAQ_DATA.map((cat,ci)=><div key={ci}>
+        <h3 style={{ fontFamily:G,fontSize:18,color:"#29275f",marginBottom:10 }}>{cat.category}</h3>
+        <div style={{ display:"flex",flexDirection:"column",gap:4 }}>
+          {cat.questions.map((faq,qi)=>{
+            const key = ci+"-"+qi;
+            const isOpen = openQ===key;
+            return <div key={qi} style={{ background:"#fff",border:"1px solid rgba(41,39,95,0.04)",borderRadius:10,overflow:"hidden" }}>
+              <div onClick={()=>setOpenQ(isOpen?null:key)} style={{ padding:"14px 18px",cursor:"pointer",display:"flex",justifyContent:"space-between",alignItems:"center" }}>
+                <span style={{ fontSize:14,fontWeight:500,color:"#29275f",fontFamily:F }}>{faq.q}</span>
+                <span style={{ fontSize:16,color:"#65c9c7",transform:isOpen?"rotate(45deg)":"",transition:"transform 0.2s",flexShrink:0,marginLeft:12 }}>+</span>
+              </div>
+              {isOpen && <div style={{ padding:"0 18px 16px",fontSize:13,color:"#666",lineHeight:1.7,fontFamily:F }}>{faq.a}</div>}
+            </div>;
+          })}
+        </div>
+      </div>)}
+    </div>
+
+    {/* Pricing overview */}
+    <div style={{ background:"#29275f",borderRadius:16,padding:"clamp(24px,3vw,40px)",marginBottom:32 }}>
+      <h3 style={{ fontFamily:G,fontSize:20,color:"#fff",marginBottom:16,textAlign:"center" }}>Typical pricing ranges</h3>
+      <p style={{ fontSize:13,color:"rgba(255,255,255,0.5)",fontFamily:F,textAlign:"center",maxWidth:500,margin:"0 auto 20px",lineHeight:1.6 }}>Every program is tailored, but here's what to expect. Exact quotes after a 15-minute call.</p>
+      <div style={{ display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(200px,1fr))",gap:12 }}>
+        {[
+          { label:"Single professional", range:"DKK 15,000–25,000", includes:"Immigration + settling-in day", note:"Most popular for tech hires" },
+          { label:"Couple", range:"DKK 25,000–40,000", includes:"Immigration + housing + settling-in", note:"Partner visa included" },
+          { label:"Family", range:"DKK 35,000–60,000", includes:"Full program incl. schools", note:"Orientation tour + school visits" },
+          { label:"Corporate program", range:"Per-hire pricing", includes:"Volume discounts from 5+ hires", note:"Dedicated account manager" },
+        ].map((p,i)=><div key={i} style={{ background:"rgba(255,255,255,0.05)",borderRadius:12,padding:18,border:"1px solid rgba(255,255,255,0.06)" }}>
+          <div style={{ fontSize:12,fontWeight:600,color:"#65c9c7",fontFamily:F,marginBottom:4 }}>{p.label}</div>
+          <div style={{ fontFamily:G,fontSize:22,color:"#fff",marginBottom:4 }}>{p.range}</div>
+          <div style={{ fontSize:11,color:"rgba(255,255,255,0.5)",fontFamily:F,lineHeight:1.4 }}>{p.includes}</div>
+          <div style={{ fontSize:10,color:"rgba(255,255,255,0.3)",fontFamily:F,marginTop:4 }}>{p.note}</div>
+        </div>)}
+      </div>
+    </div>
+
+    {/* DIY vs Us comparison */}
+    <div style={{ marginBottom:32 }}>
+      <h3 style={{ fontFamily:G,fontSize:20,color:"#29275f",marginBottom:16,textAlign:"center" }}>DIY vs. working with us</h3>
+      <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr",gap:0,borderRadius:12,overflow:"hidden",border:"1px solid rgba(41,39,95,0.04)" }}>
+        <div style={{ background:"#f2efe8",padding:20 }}>
+          <div style={{ fontSize:14,fontWeight:600,color:"#29275f",fontFamily:F,marginBottom:12 }}>Doing it yourself</div>
+          {[
+            "Work permit: research + file yourself (1–3 months)",
+            "Housing: browse portals, compete with 50 people per viewing",
+            "CPR / MitID / bank: multiple visits, 2–3 weeks",
+            "Schools: cold-call admissions, hope for openings",
+            "Departure: negotiate with landlord solo",
+            "Total time investment: 80–120 hours",
+          ].map((t,i)=><div key={i} style={{ display:"flex",gap:8,marginBottom:8 }}>
+            <span style={{ color:"#e8734a",fontSize:12,flexShrink:0 }}>&#10005;</span>
+            <span style={{ fontSize:12,color:"#666",lineHeight:1.5,fontFamily:F }}>{t}</span>
+          </div>)}
+        </div>
+        <div style={{ background:"#fff",padding:20 }}>
+          <div style={{ fontSize:14,fontWeight:600,color:"#29275f",fontFamily:F,marginBottom:12 }}>With Copenhagen Relocations</div>
+          {[
+            "Work permit: filed day one, fast-track where eligible",
+            "Housing: private viewings from our landlord network",
+            "CPR / MitID / bank: done in one day at International House",
+            "Schools: we visit with you, honest recommendations",
+            "Departure: managed move-out, deposit recovery",
+            "Your time investment: 2–3 hours total",
+          ].map((t,i)=><div key={i} style={{ display:"flex",gap:8,marginBottom:8 }}>
+            <span style={{ color:"#65c9c7",fontSize:12,flexShrink:0 }}>&#10003;</span>
+            <span style={{ fontSize:12,color:"#29275f",lineHeight:1.5,fontFamily:F }}>{t}</span>
+          </div>)}
+        </div>
+      </div>
+    </div>
+
+    <LeadMagnet />
+    <LangCTA setPage={setPage} />
+  </W></section>;
+}
+
 function PrivacyPage() {
   const S = { fontFamily:F, fontSize:14, color:"#666", lineHeight:1.8, marginBottom:16 };
   const H = { fontFamily:G, fontSize:20, color:"#29275f", marginBottom:10, marginTop:28 };
@@ -765,7 +1053,7 @@ function Footer({ setPage }) {
         <p style={{ fontSize:11,color:"rgba(255,255,255,0.35)",lineHeight:1.6,fontFamily:F }}>Immigration & relocation since 1995. Denmark's first DSP with EuRA seal.</p>
         <div style={{ marginTop:8,fontSize:11,color:"rgba(255,255,255,0.35)",fontFamily:F }}>Gyldenløvesgade 11, 3rd fl · 1600 CPH V</div>
       </div>
-      {[["Explore",[["Services","services"],["For HR","hr"],["City map","guides"],["Life in DK","life"],["Useful links","links"],["Team","about"],["Book a call","book"]]],
+      {[["Explore",[["Services","services"],["For HR","hr"],["Case studies","cases"],["City map","guides"],["FAQ","faq"],["Life in DK","life"],["Useful links","links"],["Team","about"],["Book a call","book"]]],
         ["Contact",[]]].map(([t,links],i)=><div key={i}>
         <div style={{ fontSize:10,color:"#65c9c7",textTransform:"uppercase",letterSpacing:"0.05em",fontWeight:600,marginBottom:8,fontFamily:F }}>{t}</div>
         {links.map(([l,p],j)=><div key={j} onClick={()=>{setPage(p);window.scrollTo(0,0)}} style={{ fontSize:11,color:"rgba(255,255,255,0.4)",marginBottom:5,cursor:"pointer",fontFamily:F }}>{l}</div>)}
@@ -799,6 +1087,8 @@ export default function App() {
     {page==="eura"&&<EuRAPage setPage={setPage}/>}
     {page==="about"&&<AboutPage setPage={setPage}/>}
     {page==="hr"&&<HRPage setPage={setPage}/>}
+    {page==="cases"&&<CaseStudiesPage setPage={setPage}/>}
+    {page==="faq"&&<FAQPage setPage={setPage}/>}
     {page==="links"&&<UsefulLinksPage setPage={setPage}/>}
     {page==="privacy"&&<PrivacyPage />}
     {page==="book"&&<BookPage setPage={setPage}/>}
