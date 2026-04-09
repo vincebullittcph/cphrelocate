@@ -99,6 +99,42 @@ const PARTNERS = [
   { name: "Homie", type: "Refurbishment partner" },{ name: "BoligPortal", type: "Rental platform" },{ name: "International House CPH", type: "Municipal partner" },
 ];
 
+const USEFUL_LINKS = [
+  { category: "See & do", links: [
+    { name: "Visit Copenhagen", url: "https://www.visitcopenhagen.com/", desc: "Comprehensive guide to what's on, where to eat, and what to see" },
+    { name: "AOK (Alt om København)", url: "https://www.aok.dk/english", desc: "Local guide to Copenhagen attractions, sights, and dining" },
+    { name: "Copenhagen Relocations on Facebook", url: "https://www.facebook.com/relocate.dk/", desc: "Tips, local activities, and updates from our team" },
+  ]},
+  { category: "Getting around", links: [
+    { name: "Krak", url: "https://www.krak.dk/", desc: "Danish map and local business directory" },
+    { name: "Rejseplanen", url: "https://www.rejseplanen.dk/", desc: "Public transport travel planner — trains, buses, metro" },
+    { name: "DMI Weather", url: "https://www.dmi.dk/en/vejr/", desc: "Danish weather forecasting — check before you dress" },
+    { name: "Velorbis", url: "https://velorbis.com/", desc: "Quality bicycles with English-speaking support" },
+  ]},
+  { category: "Buy & sell", links: [
+    { name: "DBA.dk", url: "https://www.dba.dk", desc: "Denmark's largest marketplace for used goods — furniture, bikes, everything" },
+    { name: "PostNord Denmark", url: "https://www.postnord.dk", desc: "Danish postal services — parcels, mail, tracking" },
+  ]},
+  { category: "Settling in", links: [
+    { name: "New in Denmark (SIRI)", url: "https://www.nyidanmark.dk/en-us/", desc: "Official immigration and residence permit information" },
+    { name: "Life in Denmark", url: "https://lifeindenmark.borger.dk", desc: "Government guide to practical life in Denmark" },
+    { name: "Copenhagen Post", url: "https://cphpost.dk/", desc: "English-language Danish news" },
+    { name: "Expat in Denmark (DI)", url: "https://di.dk/expatsignup", desc: "Newsletter for expatriates from the Confederation of Danish Industry" },
+  ]},
+  { category: "Community & social", links: [
+    { name: "Meetup Copenhagen", url: "https://www.meetup.com", desc: "Find groups for everything — language exchange, hiking, tech, parents" },
+    { name: "LINK København", url: "https://www.linkdenmark.com/", desc: "Women's networking organisation" },
+    { name: "Toastmasters Denmark", url: "https://toastmasters.dk/", desc: "Public speaking and leadership — great for meeting people" },
+    { name: "International Women's Club CPH", url: "https://iwcc.dk/", desc: "Social and cultural activities for international women" },
+  ]},
+  { category: "Family & fun", links: [
+    { name: "Tivoli Gardens", url: "https://www.tivoligardens.com/en", desc: "Copenhagen's iconic amusement park — open since 1843" },
+    { name: "LEGOLAND Billund", url: "https://www.legoland.dk", desc: "A day trip the kids will never forget" },
+    { name: "Dansk Bureauet", url: "https://danskbureauet.dk/en/", desc: "Private Danish language lessons — flexible scheduling" },
+    { name: "High-Paw", url: "https://www.high-paw.dk/", desc: "Pet and house care services" },
+  ]},
+];
+
 const TEAM = [
   { name: "Sarah Mitchell", role: "Senior relocation consultant", flags: "🇬🇧 🇺🇸", story: "Moved from London in 2014. Knows what it's like with two kids and no CPR number.", years: 9 },
   { name: "Carlos Rodríguez", role: "Immigration specialist", flags: "🇪🇸 🇲🇽 🇨🇴", story: "Former SIRI case handler. Insider knowledge to get permits through first time.", years: 12 },
@@ -124,7 +160,7 @@ function Nav({ page, setPage }) {
           <span style={{ fontFamily:G,fontSize:19,color:"#65c9c7" }}>Relocations</span>
         </div>
         <div style={{ display:"flex",alignItems:"center",gap:20,flexWrap:"wrap" }}>
-          {[["Services","services"],["City map","guides"],["Life in DK","life"],["EuRA seal","eura"],["Team","about"]].map(([l,p])=>(
+          {[["Services","services"],["For HR","hr"],["City map","guides"],["Life in DK","life"],["Useful links","links"],["Team","about"]].map(([l,p])=>(
             <span key={p} onClick={()=>{setPage(p);window.scrollTo(0,0)}} style={{ fontSize:12.5,color:page===p?"#29275f":"#999",fontWeight:page===p?600:400,cursor:"pointer",fontFamily:F }}>{l}</span>
           ))}
           <button onClick={()=>{setPage("book");window.scrollTo(0,0)}} style={{ background:"#29275f",color:"#fff",border:"none",borderRadius:100,padding:"8px 18px",fontSize:12,fontWeight:600,cursor:"pointer",fontFamily:F }}>Book a call</button>
@@ -559,6 +595,168 @@ function BookPage({ setPage }) {
   </div></W></section>;
 }
 
+function HRPage({ setPage }) {
+  const programs = [
+    { title: "Immigration & compliance", desc: "Work permits, fast-track, Pay Limit, Positive List, EU/EEA, company transfers. We've filed thousands of applications and worked inside SIRI. Full compliance documentation for your records.", icon: "🛂" },
+    { title: "Home-finding", desc: "We source 30+ properties a week through our landlord network. Your hire gets private viewings, lease negotiation, and a move-in inspection with 1,000+ photos. No landlord commissions.", icon: "🏠" },
+    { title: "Settling-in day", desc: "CPR, MitID, bank, GP, Rejsekort, utilities — done in one business day from International House. Your hire is operational within a week, not a month.", icon: "📋" },
+    { title: "Schools & childcare", desc: "We visit schools with the family, compare curricula, check availability, and handle applications. Childcare waitlists are 3–12 months — we register as early as legally possible.", icon: "🏫" },
+    { title: "Orientation & culture", desc: "Not a tourist tour — a practical 'could I live here?' walkthrough. Neighbourhoods, commute routes, grocery options, and an honest briefing on Danish workplace culture.", icon: "🗺️" },
+    { title: "Tenancy & departure", desc: "Move-out refurbishments can cost €6,000+ if mishandled. Our inspector has 30+ years of experience and saves clients thousands. Full departure coordination included.", icon: "🔑" },
+  ];
+  const reasons = [
+    { stat: "87%", label: "of failed relocations cite poor settling-in support", source: "EuRA / BGRS survey" },
+    { stat: "3×", label: "faster time-to-productivity with structured relocation", source: "Mercer Mobility" },
+    { stat: "€47k", label: "average cost of a failed international assignment", source: "PwC Global Mobility" },
+    { stat: "92%", label: "client satisfaction rate across all programs", source: "Copenhagen Relocations internal" },
+  ];
+  return <section style={{ paddingTop:88 }}><W>
+    <SH badge="For companies & HR" title="Relocation that makes your company the obvious choice" sub="Your hire's relocation experience shapes their first impression. We turn it into a retention advantage." />
+
+    {/* Why it matters */}
+    <div style={{ display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(140px,1fr))",gap:10,marginBottom:36 }}>
+      {reasons.map((r,i)=><div key={i} style={{ background:"#29275f",borderRadius:12,padding:18,textAlign:"center" }}>
+        <div style={{ fontFamily:G,fontSize:28,color:"#65c9c7",fontWeight:700 }}>{r.stat}</div>
+        <div style={{ fontSize:11,color:"rgba(255,255,255,0.6)",fontFamily:F,lineHeight:1.4,marginTop:4 }}>{r.label}</div>
+        <div style={{ fontSize:9,color:"rgba(255,255,255,0.25)",fontFamily:F,marginTop:4 }}>{r.source}</div>
+      </div>)}
+    </div>
+
+    {/* How it works for HR */}
+    <h3 style={{ fontFamily:G,fontSize:"clamp(1.2rem,2vw,1.6rem)",color:"#29275f",marginBottom:16 }}>How it works</h3>
+    <div style={{ display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(200px,1fr))",gap:4,marginBottom:32 }}>
+      {[
+        { step:"1", title:"You brief us", desc:"One call. We understand the hire's profile, timeline, family situation, and your company's requirements." },
+        { step:"2", title:"We build the program", desc:"Tailored scope — immigration, housing, settling-in, schools. Fixed pricing. No surprises." },
+        { step:"3", title:"One consultant, one number", desc:"Your hire gets a dedicated agent who knows their file. You get a single point of contact and regular status updates." },
+        { step:"4", title:"Reporting & compliance", desc:"Document trail, timeline tracking, and post-assignment feedback. Everything your global mobility team needs." },
+      ].map((s,i)=><div key={i} style={{ background:"#f2efe8",borderRadius:12,padding:18 }}>
+        <div style={{ fontFamily:G,fontSize:22,color:"#65c9c7",fontWeight:700,marginBottom:6 }}>0{s.step}</div>
+        <div style={{ fontSize:13,fontWeight:600,color:"#29275f",fontFamily:F,marginBottom:4 }}>{s.title}</div>
+        <div style={{ fontSize:12,color:"#888",lineHeight:1.6,fontFamily:F }}>{s.desc}</div>
+      </div>)}
+    </div>
+
+    {/* Program components */}
+    <h3 style={{ fontFamily:G,fontSize:"clamp(1.2rem,2vw,1.6rem)",color:"#29275f",marginBottom:16 }}>What's included</h3>
+    <div style={{ display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(300px,1fr))",gap:10,marginBottom:32 }}>
+      {programs.map((p,i)=><div key={i} style={{ background:"#fff",border:"1px solid rgba(41,39,95,0.04)",borderRadius:12,padding:20 }}>
+        <div style={{ fontSize:20,marginBottom:8 }}>{p.icon}</div>
+        <h4 style={{ fontFamily:G,fontSize:16,color:"#29275f",marginBottom:4 }}>{p.title}</h4>
+        <p style={{ fontSize:12,color:"#999",lineHeight:1.6,fontFamily:F }}>{p.desc}</p>
+      </div>)}
+    </div>
+
+    {/* Credentials */}
+    <div style={{ background:"#29275f",borderRadius:16,padding:"clamp(24px,3vw,40px)",marginBottom:32 }}>
+      <h3 style={{ fontFamily:G,fontSize:20,color:"#fff",marginBottom:16 }}>Why companies choose us</h3>
+      <div style={{ display:"grid",gridTemplateColumns:"1fr 1fr",gap:12 }}>
+        {[
+          ["EuRA Global Quality Seal","First and only Danish DSP to hold the industry's gold standard. Externally audited processes, KPIs, and compliance."],
+          ["20+ years in Copenhagen","Since 1995. We've relocated thousands of employees for companies from startups to multinationals."],
+          ["8 languages in-house","English, Spanish, French, German, Portuguese, Hindi, Chinese, Danish. Your hire speaks to someone who gets it."],
+          ["Scalable programs","One hire or a hundred. Dedicated account management for ongoing partnerships. Flexible scope."],
+          ["EcoVadis Bronze","Top 35% globally for sustainability. Because your company's ESG commitments extend to your supply chain."],
+          ["Full compliance trail","Document management, timeline tracking, GDPR-compliant data handling. Everything your legal and HR teams need."],
+        ].map(([t,d],i)=><div key={i} style={{ background:"rgba(255,255,255,0.04)",borderRadius:10,padding:16 }}>
+          <div style={{ fontSize:13,fontWeight:600,color:"#65c9c7",fontFamily:F,marginBottom:4 }}>{t}</div>
+          <div style={{ fontSize:12,color:"rgba(255,255,255,0.5)",lineHeight:1.6,fontFamily:F }}>{d}</div>
+        </div>)}
+      </div>
+    </div>
+
+    {/* Partners */}
+    <div style={{ marginBottom:32 }}>
+      <div style={{ fontSize:10,color:"#ccc",textTransform:"uppercase",letterSpacing:"0.06em",fontWeight:600,marginBottom:10,fontFamily:F }}>Trusted by companies working with</div>
+      <div style={{ display:"flex",gap:8,flexWrap:"wrap" }}>
+        {PARTNERS.map((p,i)=><div key={i} style={{ background:"#fff",border:"1px solid rgba(41,39,95,0.04)",borderRadius:8,padding:"8px 14px" }}>
+          <div style={{ fontSize:12,fontWeight:600,color:"#29275f",fontFamily:F }}>{p.name}</div>
+          <div style={{ fontSize:9,color:"#ccc",fontFamily:F }}>{p.type}</div>
+        </div>)}
+      </div>
+    </div>
+
+    {/* CTA */}
+    <div style={{ background:"#f2efe8",borderRadius:16,padding:"clamp(24px,3vw,40px)",textAlign:"center",marginBottom:8 }}>
+      <h3 style={{ fontFamily:G,fontSize:"clamp(1.2rem,2vw,1.6rem)",color:"#29275f",marginBottom:8 }}>Let's talk about your relocation needs</h3>
+      <p style={{ fontSize:13,color:"#999",lineHeight:1.7,fontFamily:F,maxWidth:440,margin:"0 auto 16px" }}>Whether you're hiring one person or building a Denmark team, we'll design a program that fits. No templates.</p>
+      <div style={{ display:"flex",gap:10,justifyContent:"center",flexWrap:"wrap" }}>
+        <button onClick={()=>{setPage("book");window.scrollTo(0,0)}} style={{ background:"#29275f",color:"#fff",border:"none",borderRadius:100,padding:"12px 24px",fontSize:13,fontWeight:600,cursor:"pointer",fontFamily:F }}>Book an intro call →</button>
+        <a href="mailto:corporate@relocate.dk" style={{ background:"transparent",color:"#29275f",border:"2px solid rgba(41,39,95,0.12)",borderRadius:100,padding:"12px 24px",fontSize:13,fontWeight:600,textDecoration:"none",fontFamily:F }}>corporate@relocate.dk</a>
+      </div>
+    </div>
+    <LangCTA setPage={setPage} />
+  </W></section>;
+}
+
+function UsefulLinksPage({ setPage }) {
+  return <section style={{ paddingTop:88 }}><W>
+    <SH badge="Useful links" title="A little help from your friends" sub="A quick overview of useful stuff — bookmarks we'd share with a friend who just moved to Copenhagen." />
+    <div style={{ display:"flex",flexDirection:"column",gap:24,marginBottom:20 }}>
+      {USEFUL_LINKS.map((cat,i)=><div key={i}>
+        <h3 style={{ fontFamily:G,fontSize:18,color:"#29275f",marginBottom:10 }}>{cat.category}</h3>
+        <div style={{ display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(260px,1fr))",gap:8 }}>
+          {cat.links.map((link,j)=><a key={j} href={link.url} target="_blank" rel="noopener noreferrer" style={{ background:"#fff",border:"1px solid rgba(41,39,95,0.04)",borderRadius:10,padding:16,textDecoration:"none",transition:"transform 0.15s",display:"block" }}
+            onMouseEnter={e=>e.currentTarget.style.transform="translateY(-2px)"} onMouseLeave={e=>e.currentTarget.style.transform=""}>
+            <div style={{ fontSize:13,fontWeight:600,color:"#29275f",fontFamily:F,marginBottom:3 }}>{link.name} <span style={{ fontSize:11,color:"#65c9c7" }}>→</span></div>
+            <div style={{ fontSize:11,color:"#999",lineHeight:1.5,fontFamily:F }}>{link.desc}</div>
+          </a>)}
+        </div>
+      </div>)}
+    </div>
+    <LangCTA setPage={setPage} />
+  </W></section>;
+}
+
+function PrivacyPage() {
+  const S = { fontFamily:F, fontSize:14, color:"#666", lineHeight:1.8, marginBottom:16 };
+  const H = { fontFamily:G, fontSize:20, color:"#29275f", marginBottom:10, marginTop:28 };
+  return <section style={{ paddingTop:88 }}><W>
+    <div style={{ maxWidth:700,margin:"0 auto" }}>
+      <SH badge="Legal" title="Privacy notice" sub="How Copenhagen Relocations processes your personal information." />
+
+      <h3 style={H}>Processing personal information</h3>
+      <p style={S}>Copenhagen Relocations takes your privacy seriously. We process personal information to provide requested services:</p>
+      <p style={S}><strong>Immigration services</strong>, including but not limited to: work and residence permits, EU certificates, permanent residency, Danish citizenship/dual citizenship, CPR registration, de-registration, notification of termination of employment in Denmark, RUT registration.</p>
+      <p style={S}><strong>Destination services</strong>, including but not limited to: finding homes and schools, entering into leases, utility hook-up, ordering services such as internet, TV, local CPR registration, tax card/tax number issuance.</p>
+
+      <h3 style={H}>Categories of personal data</h3>
+      <p style={S}>Copenhagen Relocations collects and processes the minimum data needed to fulfill the services. The data includes, but is not limited to: name, date of birth, gender, nationality, current address, contact details, passport information, employment information, marital status, information about children, education background, and work experience details.</p>
+      <p style={S}>When data is compulsory in order to complete a service, refusal to provide such data might result in failure to supply, or partially supply, the service.</p>
+
+      <h3 style={H}>Sharing your information</h3>
+      <p style={S}>Your information is only shared with the party or parties:</p>
+      <ul style={{ ...S, paddingLeft:20 }}>
+        <li style={{ marginBottom:8 }}>Directly responsible for ruling on applications (for example, Danish Immigration Authorities, State Administration, local Municipality, SKAT, Danish Working Environment Authority)</li>
+        <li style={{ marginBottom:8 }}>Facilitating requested services (for example, real estate agencies, chosen landlords, schools and other similar institutions, banks, utility and service suppliers)</li>
+        <li style={{ marginBottom:8 }}>Requesting the service on your behalf (for example, your employer, law firm, RMC)</li>
+      </ul>
+      <p style={S}>Copenhagen Relocations uses external accounting and IT (server) companies. Some third parties might be located outside the EU. They all shall comply with the General Data Protection Regulation; therefore, they shall protect the privacy and may not disclose personal data for any purposes other than those mentioned above.</p>
+      <p style={S}>We do not disclose any information to any other party or company, except to help prevent fraud or if required to do so by law.</p>
+
+      <h3 style={H}>Our commitment</h3>
+      <p style={S}>Copenhagen Relocations shall only use or otherwise process personal data:</p>
+      <ul style={{ ...S, paddingLeft:20 }}>
+        <li style={{ marginBottom:8 }}>In accordance with applicable data protection laws</li>
+        <li style={{ marginBottom:8 }}>In accordance with applicable industry standards concerning privacy, data protection, confidentiality and information security</li>
+      </ul>
+
+      <h3 style={H}>Data retention period</h3>
+      <p style={S}>Your personal information is kept on file as per contractual or Danish law requirements, and then safely disposed / permanently erased. The average period of retention is 5 years.</p>
+
+      <h3 style={H}>Your rights</h3>
+      <p style={S}>You have the right to access your personal data held by Copenhagen Relocations. You have the right to have your data rectified or erased, to request suspension of your data processing and/or object to the processing of your data.</p>
+
+      <h3 style={H}>Contact</h3>
+      <p style={S}>For further information on how your information is used, how we maintain the security of your information, and your rights — contact us at <a href="mailto:contact@relocate.dk" style={{ color:"#65c9c7" }}>contact@relocate.dk</a>.</p>
+      <div style={{ background:"#f2efe8",borderRadius:12,padding:18,marginBottom:8 }}>
+        <div style={{ fontSize:12,fontWeight:600,color:"#29275f",fontFamily:F,marginBottom:4 }}>Danish Data Protection Agency</div>
+        <p style={{ fontSize:12,color:"#888",lineHeight:1.6,fontFamily:F,margin:0 }}>Borgergade 28, DK-1300 Copenhagen K<br/>T: +45 33 19 32 00</p>
+      </div>
+    </div>
+  </W></section>;
+}
+
 function Footer({ setPage }) {
   return <footer style={{ background:"#29275f",padding:"36px clamp(16px,3vw,48px) 24px",marginTop:48 }}><div style={{ maxWidth:1200,margin:"0 auto" }}>
     <div style={{ display:"grid",gridTemplateColumns:"2fr 1fr 1fr 1fr",gap:24,marginBottom:24 }}>
@@ -567,7 +765,7 @@ function Footer({ setPage }) {
         <p style={{ fontSize:11,color:"rgba(255,255,255,0.35)",lineHeight:1.6,fontFamily:F }}>Immigration & relocation since 1995. Denmark's first DSP with EuRA seal.</p>
         <div style={{ marginTop:8,fontSize:11,color:"rgba(255,255,255,0.35)",fontFamily:F }}>Gyldenløvesgade 11, 3rd fl · 1600 CPH V</div>
       </div>
-      {[["Explore",[["Services","services"],["City map","guides"],["Life in DK","life"],["EuRA seal","eura"],["Team","about"],["Book a call","book"]]],
+      {[["Explore",[["Services","services"],["For HR","hr"],["City map","guides"],["Life in DK","life"],["Useful links","links"],["Team","about"],["Book a call","book"]]],
         ["Contact",[]]].map(([t,links],i)=><div key={i}>
         <div style={{ fontSize:10,color:"#65c9c7",textTransform:"uppercase",letterSpacing:"0.05em",fontWeight:600,marginBottom:8,fontFamily:F }}>{t}</div>
         {links.map(([l,p],j)=><div key={j} onClick={()=>{setPage(p);window.scrollTo(0,0)}} style={{ fontSize:11,color:"rgba(255,255,255,0.4)",marginBottom:5,cursor:"pointer",fontFamily:F }}>{l}</div>)}
@@ -582,7 +780,7 @@ function Footer({ setPage }) {
       <div style={{ fontSize:10,color:"rgba(255,255,255,0.25)",fontFamily:F }}>© 2026 Copenhagen Relocations</div>
       <div style={{ display:"flex",gap:12 }}>
         <a href="https://www.relocate.dk/cookie-policy/cookie-policy-2/" target="_blank" rel="noopener" style={{ fontSize:10,color:"rgba(255,255,255,0.25)",textDecoration:"underline",fontFamily:F }}>Cookies</a>
-        <a href="https://www.relocate.dk/cookie-policy/copenhagen-relocations-privacy-notice/" target="_blank" rel="noopener" style={{ fontSize:10,color:"rgba(255,255,255,0.25)",textDecoration:"underline",fontFamily:F }}>Privacy</a>
+        <span onClick={()=>{setPage("privacy");window.scrollTo(0,0)}} style={{ fontSize:10,color:"rgba(255,255,255,0.25)",textDecoration:"underline",fontFamily:F,cursor:"pointer" }}>Privacy</span>
       </div>
     </div>
   </div></footer>;
@@ -600,6 +798,9 @@ export default function App() {
     {page==="life"&&<LifePage setPage={setPage}/>}
     {page==="eura"&&<EuRAPage setPage={setPage}/>}
     {page==="about"&&<AboutPage setPage={setPage}/>}
+    {page==="hr"&&<HRPage setPage={setPage}/>}
+    {page==="links"&&<UsefulLinksPage setPage={setPage}/>}
+    {page==="privacy"&&<PrivacyPage />}
     {page==="book"&&<BookPage setPage={setPage}/>}
     {post&&<PostPage post={post} setPage={setPage}/>}
     <Footer setPage={setPage}/>
