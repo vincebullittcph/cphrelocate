@@ -199,8 +199,8 @@ function CopenhagenMap({ setPage, setActivePin, activePin }) {
       <MapContainer center={center} zoom={13} style={{ height: 480, width: "100%" }} scrollWheelZoom={false} zoomControl={false}>
         {/* Clean, muted map tiles that match the site's aesthetic */}
         <TileLayer
-          attribution='&copy; <a href="https://stadiamaps.com/" target="_blank">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>'
-          url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/" target="_blank">CARTO</a>'
+          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
         />
         <FitBounds />
 
