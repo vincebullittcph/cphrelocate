@@ -1,4 +1,7 @@
 import { useState, useRef, useEffect } from "react";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
 
 // ─── Data ───
 
@@ -14,16 +17,16 @@ const LANGUAGES = [
 ];
 
 const MAP_PINS = [
-  { id: "norrebro", x: 38, y: 32, label: "Nørrebro", type: "neighbourhood", color: "#e8734a", desc: "The real Copenhagen — multicultural, loud, alive", rent: "10,000–14,000 DKK" },
-  { id: "osterbro", x: 55, y: 22, label: "Østerbro", type: "neighbourhood", color: "#65c9c7", desc: "The family favourite — tree-lined, safe, green", rent: "12,000–18,000 DKK" },
-  { id: "frederiksberg", x: 30, y: 52, label: "Frederiksberg", type: "neighbourhood", color: "#89d8d3", desc: "The elegant middle ground — gardens, restaurants, calm", rent: "11,000–16,000 DKK" },
-  { id: "vesterbro", x: 38, y: 55, label: "Vesterbro", type: "neighbourhood", color: "#e8734a", desc: "The reinvented quarter — gritty meets gentrified", rent: "10,000–15,000 DKK" },
-  { id: "nordhavn", x: 68, y: 18, label: "Nordhavn", type: "neighbourhood", color: "#65c9c7", desc: "The new build frontier — modern, harbour views", rent: "13,000–20,000 DKK" },
-  { id: "valby", x: 22, y: 72, label: "Valby", type: "neighbourhood", color: "#89d8d3", desc: "The smart suburban pick — space, value, 15 min to centre", rent: "8,000–12,000 DKK" },
-  { id: "cis", x: 72, y: 24, label: "Copenhagen Intl School", type: "school", color: "#29275f", desc: "IB curriculum, 80+ nationalities, harbour campus in Nordhavn" },
-  { id: "roklub", x: 60, y: 35, label: "Københavns Roklub", type: "club", color: "#29275f", desc: "Founded 1866 — rowing club where expats build real friendships" },
-  { id: "ihcph", x: 48, y: 48, label: "International House CPH", type: "landmark", color: "#29275f", desc: "One-stop for CPR, tax, SIRI — and our office is here" },
-  { id: "torvehallerne", x: 45, y: 38, label: "Torvehallerne", type: "landmark", color: "#d3d3d3", desc: "The food hall at the edge of Nørrebro — a Copenhagen essential" },
+  { id: "norrebro", lat: 55.6920, lng: 12.5530, label: "Nørrebro", type: "neighbourhood", color: "#e8734a", desc: "The real Copenhagen — multicultural, loud, alive", rent: "10,000–14,000 DKK" },
+  { id: "osterbro", lat: 55.7050, lng: 12.5770, label: "Østerbro", type: "neighbourhood", color: "#65c9c7", desc: "The family favourite — tree-lined, safe, green", rent: "12,000–18,000 DKK" },
+  { id: "frederiksberg", lat: 55.6790, lng: 12.5280, label: "Frederiksberg", type: "neighbourhood", color: "#89d8d3", desc: "The elegant middle ground — gardens, restaurants, calm", rent: "11,000–16,000 DKK" },
+  { id: "vesterbro", lat: 55.6690, lng: 12.5520, label: "Vesterbro", type: "neighbourhood", color: "#e8734a", desc: "The reinvented quarter — gritty meets gentrified", rent: "10,000–15,000 DKK" },
+  { id: "nordhavn", lat: 55.7100, lng: 12.6000, label: "Nordhavn", type: "neighbourhood", color: "#65c9c7", desc: "The new build frontier — modern, harbour views", rent: "13,000–20,000 DKK" },
+  { id: "valby", lat: 55.6610, lng: 12.5150, label: "Valby", type: "neighbourhood", color: "#89d8d3", desc: "The smart suburban pick — space, value, 15 min to centre", rent: "8,000–12,000 DKK" },
+  { id: "cis", lat: 55.7070, lng: 12.6050, label: "Copenhagen Intl School", type: "school", color: "#29275f", desc: "IB curriculum, 80+ nationalities, harbour campus in Nordhavn" },
+  { id: "roklub", lat: 55.6950, lng: 12.5880, label: "Københavns Roklub", type: "club", color: "#29275f", desc: "Founded 1866 — rowing club where expats build real friendships" },
+  { id: "ihcph", lat: 55.6810, lng: 12.5660, label: "International House CPH", type: "landmark", color: "#29275f", desc: "One-stop for CPR, tax, SIRI — and our office is here" },
+  { id: "torvehallerne", lat: 55.6840, lng: 12.5710, label: "Torvehallerne", type: "landmark", color: "#d3d3d3", desc: "The food hall at the edge of Nørrebro — a Copenhagen essential" },
 ];
 
 const BLOG_POSTS = [
@@ -164,68 +167,82 @@ function LangCTA({ setPage }) {
 
 function W({ children }) { return <div style={{ maxWidth:1200,margin:"0 auto",padding:"0 clamp(16px,3vw,48px)" }}>{children}</div>; }
 
-// ─── Interactive Copenhagen Map ───
+// ─── Interactive Copenhagen Map (Leaflet) ───
+
+// Creates a colored circle marker icon for each pin
+function createPinIcon(color, isActive) {
+  const size = isActive ? 18 : 13;
+  return L.divIcon({
+    className: "",
+    iconSize: [size, size],
+    iconAnchor: [size / 2, size / 2],
+    html: `<div style="width:${size}px;height:${size}px;border-radius:50%;background:${color};border:2.5px solid #fff;box-shadow:${isActive ? "0 0 0 4px rgba(41,39,95,0.12), 0 4px 12px rgba(0,0,0,0.15)" : "0 2px 6px rgba(0,0,0,0.1)"};transition:all 0.2s"></div>`,
+  });
+}
+
+// Fits the map bounds to show all pins on first load
+function FitBounds() {
+  const map = useMap();
+  useEffect(() => {
+    const bounds = L.latLngBounds(MAP_PINS.map(p => [p.lat, p.lng]));
+    map.fitBounds(bounds.pad(0.15));
+  }, [map]);
+  return null;
+}
 
 function CopenhagenMap({ setPage, setActivePin, activePin }) {
+  // Center of Copenhagen
+  const center = [55.686, 12.566];
+
   return (
-    <div style={{ position:"relative",background:"linear-gradient(145deg,#eef6f5 0%,#f2efe8 50%,#e8eef6 100%)",borderRadius:18,padding:24,minHeight:420,overflow:"hidden" }}>
-      {/* Water areas */}
-      <svg viewBox="0 0 100 100" style={{ position:"absolute",inset:0,width:"100%",height:"100%",opacity:0.15 }}>
-        <ellipse cx="80" cy="30" rx="25" ry="35" fill="#65c9c7"/>
-        <ellipse cx="50" cy="85" rx="40" ry="15" fill="#65c9c7"/>
-        <rect x="65" y="10" width="8" height="50" rx="4" fill="#65c9c7" transform="rotate(5,69,35)"/>
-      </svg>
+    <div style={{ borderRadius: 18, overflow: "hidden", position: "relative" }}>
+      <MapContainer center={center} zoom={13} style={{ height: 480, width: "100%" }} scrollWheelZoom={false} zoomControl={false}>
+        {/* Clean, muted map tiles that match the site's aesthetic */}
+        <TileLayer
+          attribution='&copy; <a href="https://stadiamaps.com/" target="_blank">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>'
+          url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
+        />
+        <FitBounds />
 
-      {/* Map label */}
-      <div style={{ position:"relative",zIndex:1,marginBottom:8 }}>
-        <span style={{ fontFamily:G,fontSize:11,color:"#29275f",opacity:0.4,textTransform:"uppercase",letterSpacing:"0.08em" }}>Copenhagen</span>
-      </div>
-
-      {/* Pins */}
-      {MAP_PINS.map(pin=>{
-        const isActive = activePin===pin.id;
-        const post = BLOG_POSTS.find(p=>p.pinId===pin.id);
-        return (
-          <div key={pin.id}
-            onClick={()=>setActivePin(isActive?null:pin.id)}
-            style={{ position:"absolute",left:`${pin.x}%`,top:`${pin.y}%`,transform:"translate(-50%,-50%)",cursor:"pointer",zIndex:isActive?10:2,transition:"z-index 0s" }}>
-            {/* Pin dot */}
-            <div style={{ width:isActive?16:12,height:isActive?16:12,borderRadius:"50%",background:pin.color,border:"2.5px solid #fff",boxShadow:isActive?"0 0 0 4px rgba(41,39,95,0.12), 0 4px 12px rgba(0,0,0,0.15)":"0 2px 6px rgba(0,0,0,0.1)",transition:"all 0.2s",margin:"0 auto" }}/>
-            {/* Label */}
-            <div style={{ position:"absolute",top:"100%",left:"50%",transform:"translateX(-50%)",marginTop:4,whiteSpace:"nowrap",fontSize:10,fontWeight:600,color:"#29275f",fontFamily:F,opacity:isActive?1:0.7,transition:"opacity 0.15s",textAlign:"center" }}>
-              {pin.label}
-            </div>
-            {/* Popup */}
-            {isActive && (
-              <div style={{ position:"absolute",bottom:"100%",left:"50%",transform:"translateX(-50%)",marginBottom:12,background:"#fff",borderRadius:12,padding:16,width:260,boxShadow:"0 8px 32px rgba(41,39,95,0.12)",border:"1px solid rgba(41,39,95,0.06)",zIndex:20 }}
-                onClick={e=>e.stopPropagation()}>
-                <div style={{ display:"flex",gap:6,marginBottom:6 }}>
-                  <Badge>{pin.type}</Badge>
-                  {pin.rent&&<span style={{ fontSize:10,color:"#65c9c7",fontWeight:600,fontFamily:F,alignSelf:"center" }}>{pin.rent}</span>}
+        {MAP_PINS.map(pin => {
+          const post = BLOG_POSTS.find(p => p.pinId === pin.id);
+          return (
+            <Marker
+              key={pin.id}
+              position={[pin.lat, pin.lng]}
+              icon={createPinIcon(pin.color, activePin === pin.id)}
+              eventHandlers={{ click: () => setActivePin(activePin === pin.id ? null : pin.id) }}
+            >
+              <Popup>
+                <div style={{ minWidth: 220, fontFamily: F }}>
+                  <div style={{ display: "flex", gap: 6, marginBottom: 6 }}>
+                    <Badge>{pin.type}</Badge>
+                    {pin.rent && <span style={{ fontSize: 10, color: "#65c9c7", fontWeight: 600, fontFamily: F, alignSelf: "center" }}>{pin.rent}</span>}
+                  </div>
+                  <div style={{ fontFamily: G, fontSize: 15, color: "#29275f", marginBottom: 4 }}>{pin.label}</div>
+                  <p style={{ fontSize: 12, color: "#888", lineHeight: 1.5, fontFamily: F, marginBottom: 10 }}>{pin.desc}</p>
+                  {post ? (
+                    <button onClick={() => { setPage("post-" + post.slug); window.scrollTo(0, 0); }} style={{ background: "#29275f", color: "#fff", border: "none", borderRadius: 8, padding: "7px 14px", fontSize: 11, fontWeight: 600, cursor: "pointer", fontFamily: F, width: "100%" }}>
+                      Read the full guide →
+                    </button>
+                  ) : (
+                    <button onClick={() => { setPage("book"); window.scrollTo(0, 0); }} style={{ background: "#65c9c7", color: "#fff", border: "none", borderRadius: 8, padding: "7px 14px", fontSize: 11, fontWeight: 600, cursor: "pointer", fontFamily: F, width: "100%" }}>
+                      Ask us about this area →
+                    </button>
+                  )}
                 </div>
-                <div style={{ fontFamily:G,fontSize:15,color:"#29275f",marginBottom:4 }}>{pin.label}</div>
-                <p style={{ fontSize:12,color:"#888",lineHeight:1.5,fontFamily:F,marginBottom:10 }}>{pin.desc}</p>
-                {post ? (
-                  <button onClick={()=>{setPage("post-"+post.slug);window.scrollTo(0,0)}} style={{ background:"#29275f",color:"#fff",border:"none",borderRadius:8,padding:"7px 14px",fontSize:11,fontWeight:600,cursor:"pointer",fontFamily:F,width:"100%" }}>
-                    Read the full guide →
-                  </button>
-                ) : (
-                  <button onClick={()=>{setPage("book");window.scrollTo(0,0)}} style={{ background:"#65c9c7",color:"#fff",border:"none",borderRadius:8,padding:"7px 14px",fontSize:11,fontWeight:600,cursor:"pointer",fontFamily:F,width:"100%" }}>
-                    Ask us about this area →
-                  </button>
-                )}
-              </div>
-            )}
-          </div>
-        );
-      })}
+              </Popup>
+            </Marker>
+          );
+        })}
+      </MapContainer>
 
-      {/* Legend */}
-      <div style={{ position:"absolute",bottom:16,right:16,display:"flex",gap:12,zIndex:5 }}>
-        {[["Neighbourhood","#e8734a"],["School / Club","#29275f"],["Landmark","#65c9c7"]].map(([l,c])=>(
-          <div key={l} style={{ display:"flex",gap:4,alignItems:"center" }}>
-            <div style={{ width:8,height:8,borderRadius:"50%",background:c }}/>
-            <span style={{ fontSize:9,color:"#999",fontFamily:F }}>{l}</span>
+      {/* Legend overlay */}
+      <div style={{ position: "absolute", bottom: 16, right: 16, display: "flex", gap: 12, zIndex: 1000, background: "rgba(250,249,246,0.9)", borderRadius: 8, padding: "6px 12px" }}>
+        {[["Neighbourhood", "#e8734a"], ["School / Club", "#29275f"], ["Landmark", "#65c9c7"]].map(([l, c]) => (
+          <div key={l} style={{ display: "flex", gap: 4, alignItems: "center" }}>
+            <div style={{ width: 8, height: 8, borderRadius: "50%", background: c }} />
+            <span style={{ fontSize: 9, color: "#999", fontFamily: F }}>{l}</span>
           </div>
         ))}
       </div>

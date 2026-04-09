@@ -1,1 +1,15 @@
 body { margin: 0; }
+
+/* Style Leaflet popups to match the site design */
+.leaflet-popup-content-wrapper {
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(41, 39, 95, 0.12);
+  border: 1px solid rgba(41, 39, 95, 0.06);
+  padding: 4px;
+}
+.leaflet-popup-tip {
+  box-shadow: none;
+}
+.leaflet-popup-content {
+  margin: 10px 12px;
+}
